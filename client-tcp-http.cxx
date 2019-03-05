@@ -7,8 +7,9 @@
 #include <time.h>
 #include <stdlib.h>
 
-#define NUM_PORT 50013
-#define IP_ADDRESS "10.203.9.212"
+#define NUM_PORT 80
+#define IP_ADDRESS "139.124.187.23"
+//ressource : /tp1.html
 #define MAX_SIZE 1024
 
 using namespace std;
@@ -21,8 +22,8 @@ void exitErreur(const char * msg) {
 
 int main(int argc, char* argv[]) {
 
-	if(argc != 3){
-		cerr << "Usage : ./client-tcp-http.run <IP@> <port>" << endl;
+	if(argc != 4){
+		cerr << "Usage : ./client-tcp-http.run <IP@> <port> <ressource>" << endl;
 		return -1;
 	}
 
@@ -41,7 +42,7 @@ int main(int argc, char* argv[]) {
 	if(connect(sock_client, (struct sockaddr*)&sockaddr_serveur, sizeof(sockaddr_serveur)) == -1)
 		exitErreur("connect");
 
-	string query = "GET /tp1.html\n";
+	string query = "GET " + string(argv[3]) + "\n";
 	const char* msg = query.c_str();
 	if (write(sock_client, msg, strlen(msg)) == -1)
 			exitErreur("write");
