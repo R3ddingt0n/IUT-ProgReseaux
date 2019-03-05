@@ -38,7 +38,8 @@ int main(int argc, char* argv[]) {
 	sockaddr_serveur.sin_port = htons(atoi(argv[2]));
 	inet_aton(argv[1], &sockaddr_serveur.sin_addr);
 	
-	connect(sock_client, (struct sockaddr*)&sockaddr_serveur, sizeof(sockaddr_serveur));
+	if(connect(sock_client, (struct sockaddr*)&sockaddr_serveur, sizeof(sockaddr_serveur)) == -1)
+		exitErreur("connect");
 
 	string query = "GET /tp1.html\n";
 	const char* msg = query.c_str();
