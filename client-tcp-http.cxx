@@ -40,6 +40,11 @@ int main(int argc, char* argv[]) {
 	
 	connect(sock_client, (struct sockaddr*)&sockaddr_serveur, sizeof(sockaddr_serveur));
 
+	string query = "GET /tp1.html\n";
+	const char* msg = query.c_str();
+	if (write(sock_client, msg, strlen(msg)) == -1)
+			exitErreur("write");
+
 	string message = "";
 	char buf[MAX_SIZE];
 	while(true){
