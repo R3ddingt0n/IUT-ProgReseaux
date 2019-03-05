@@ -22,7 +22,7 @@ void exitErreur(const char * msg) {
 int main(int argc, char* argv[]) {
 
 	if(argc != 3){
-		cerr << "Usage : ./client-tcp-daytime.run <IP@> <port>" << endl;
+		cerr << "Usage : ./client-tcp-http.run <IP@> <port>" << endl;
 		return -1;
 	}
 
