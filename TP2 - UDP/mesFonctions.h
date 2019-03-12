@@ -7,7 +7,7 @@
 #include <time.h>
 #include <stdlib.h>
 
-#define NUM_PORT 50013
+#define NUM_PORT 50000
 #define IP_ADDRESS "10.203.9.148"
 #define BACKLOG 50
 #define BUFFER_SIZE 1024
