@@ -58,14 +58,17 @@ int main(int argc, char* argv[]) {
         if (strcmp("bye", sendBuffer) == 0)
         {
             cout << endl << "Déconnexion" << endl;
-
             break;
         }
 
-        if (readLine(sock_client, message) < 0)
+	int line = readLine(sock_client, message);
+        if (line == -1)
         {
             exitErreur("read");
         }
+	if(line == 0){
+		break;
+	}
 
         cout << "Server> " << message;
     }

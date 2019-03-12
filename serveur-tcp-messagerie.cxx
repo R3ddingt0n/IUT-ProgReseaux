@@ -45,6 +45,8 @@ int main() {
         struct sockaddr_in sockaddr_client;
         socklen_t addrlen_client;
 
+		cout << "J'attend un client" << endl;
+
         sock_client = accept(sock_serveur, (struct sockaddr *)&sockaddr_client, &addrlen_client);
         if (sock_client == -1)
             exitErreur("accept");
@@ -55,14 +57,19 @@ int main() {
         {
 
             string message;
-            if (readLine(sock_client, message) < 0)
-            {
-                exitErreur("read");
-            }
+            int line = readLine(sock_client, message);
+        	if (line == -1)
+        	{
+            	exitErreur("read");
+        	}
+			if(line == 0){
+				cout << "Déconnexion de " << inet_ntoa(sockaddr_client.sin_addr) << ":" << ntohs(sockaddr_client.sin_port) << endl << endl;
+				break;
+			}
 
             cout << "Client> " << message;
 
-            if (message == "bye")
+            if (message == "bye\n")
             {
                 cout << "Déconnexion de " << inet_ntoa(sockaddr_client.sin_addr) << ":" << ntohs(sockaddr_client.sin_port) << endl << endl;
                 break;
@@ -79,8 +86,10 @@ int main() {
                 exitErreur("write");
             }
         }
-        close(sock_serveur);
-        return 0;
+       
     }
+
+ close(sock_serveur);
+        return 0;
 }
 
