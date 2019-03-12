@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+#include <mesFonctions.h>
 
 #define NUM_PORT 50013
 #define IP_ADDRESS "10.203.9.148"
@@ -14,16 +15,9 @@
 
 using namespace std;
 
-void exitErreur(const char * msg) {
-    perror(msg);
-    exit( EXIT_FAILURE);
-
-}
-
 int main() {
 
     char sendBuffer[BUFFER_SIZE];
-    char recvBuffer[BUFFER_SIZE];
     int sock_serveur = socket(AF_INET, SOCK_STREAM, 0);
 
     struct sockaddr_in sockaddr_serveur;
@@ -59,15 +53,16 @@ int main() {
 
         while (true)
         {
-            if (read(sock_client, recvBuffer, sizeof(recvBuffer)) < 0)
+
+            string message;
+            if (readLine(sock_client, message) < 0)
             {
-                exitErreur("recv");
+                exitErreur("read");
             }
 
-            cout << "Client> " << recvBuffer;
-            cout << endl;
+            cout << "Client> " << message;
 
-            if (strcmp("bye", recvBuffer) == 0)
+            if (message == "bye")
             {
                 cout << "Déconnexion de " << inet_ntoa(sockaddr_client.sin_addr) << ":" << ntohs(sockaddr_client.sin_port) << endl << endl;
                 break;
@@ -76,12 +71,16 @@ int main() {
             cout << "Server> ";
             cin.getline(sendBuffer, BUFFER_SIZE);
 
-            if (write(sock_client, sendBuffer, sizeof(sendBuffer)) < 0)
+	    	message = sendBuffer;
+        	message += '\n';
+
+            if (write(sock_client, message.c_str(), message.size()) < 0)
             {
-                exitErreur("send");
+                exitErreur("write");
             }
         }
         close(sock_serveur);
         return 0;
     }
 }
+
