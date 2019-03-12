@@ -8,7 +8,7 @@
 #include <stdlib.h>
 
 #define NUM_PORT 50013
-#define IP_ADDRESS "10.203.9.212"
+#define IP_ADDRESS "10.203.9.148"
 #define BACKLOG 50
 #define BUFFER_SIZE 1024
 
@@ -59,7 +59,7 @@ int main() {
 
         while (true)
         {
-            if (recv(sock_client, recvBuffer, sizeof(recvBuffer), 0) < 0)
+            if (read(sock_client, recvBuffer, sizeof(recvBuffer)) < 0)
             {
                 exitErreur("recv");
             }
@@ -76,7 +76,7 @@ int main() {
             cout << "Server> ";
             cin.getline(sendBuffer, BUFFER_SIZE);
 
-            if (send(sock_client, sendBuffer, sizeof(sendBuffer), 0) < 0)
+            if (write(sock_client, sendBuffer, sizeof(sendBuffer)) < 0)
             {
                 exitErreur("send");
             }
