@@ -1,0 +1,11 @@
+Programmation Répartie TP4
+
+1) Ce serveur écoute en TCP sur un port passé en paramètre. Il reçoit d'un client un nom de fichier, lit dans ce fichier et renvoie au client le contenu du fichier.
+
+2) On utilise un OutputStream qui envoie des octets, car on utilise aussi un FileInputStream qui lit des octets. Le BufferedWriter écrit du texte bufferisé.
+
+3) Oui, mais il faudra adapter le code en fonction, et cela ne sera pas très pratique.
+
+4) Oui grâce aux threads
+
+5)Il y a un timeout, le client sera déconnecté
