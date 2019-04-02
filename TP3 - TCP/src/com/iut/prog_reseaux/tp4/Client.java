@@ -23,7 +23,7 @@ public class Client {
 
             //in.transferTo(new FileOutputStream(new File("/amuhome/t17009199/Documents/IUT-ProgReseaux/TP3 - TCP/src/com/iut/prog_reseaux/tp4/image1.jpg")));
 
-            FileOutputStream fileOutputStream = new FileOutputStream(new File("/amuhome/t17009199/Documents/IUT-ProgReseaux/TP3 - TCP/src/com/iut/prog_reseaux/tp4/image1.jpg"));
+            FileOutputStream fileOutputStream = new FileOutputStream(new File("/amuhome/t17009199/Documents/ProgRepartie/TP3 - TCP/src/com/iut/prog_reseaux/tp4/image2.jpg"));
             byte buf[] = new byte[512];
             int nbOctets = 0;
 
@@ -51,7 +51,7 @@ public class Client {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        new Client("10.203.9.145", 2000).getFile("image.jpg");
+        new Client("10.203.9.88", 2000).getFile("image.jpg");
 
     }
 
